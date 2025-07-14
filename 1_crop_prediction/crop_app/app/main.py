@@ -73,5 +73,4 @@ async def predict(request: Request,
     # encoded_crop = urllib.parse.quote(predicted_crop_name) # It converts characters not allowed to have special meanings in URLs (like spaces, &, =, etc.)
 
     return RedirectResponse(url=f"/?request={request.method}&prediction={predicted_crop_name}&N={N}&P={P}&K={K}&temperature={temperature}&humidity={humidity}&ph={ph}&rainfall={rainfall}",
-                            status_code = 303) 
-
+                            status_code = 303)

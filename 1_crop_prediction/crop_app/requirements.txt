@@ -1,6 +1,5 @@
 numpy==1.26.4
-polars==1.15.0
-pyarrow==17.0.0
+pandas==2.2.2
 scikit-learn==1.6.1
 dash==3.1.1
 fastapi==0.112.0

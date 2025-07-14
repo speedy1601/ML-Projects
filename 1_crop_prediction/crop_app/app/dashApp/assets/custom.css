@@ -1,0 +1,54 @@
+body {
+    background-color: #000000;
+}
+
+#dashApp {
+    display: flex;
+    flex-direction: column;  /* makes Flexbox stack children vertically.   */
+    justify-content: center; /* center children vertically.                */
+    align-items: center;     /* center children horizontally.              */
+
+    position: relative;
+    margin: -5px;            /* distance between dashApp and its outside.  */
+    line-height: 10px;       /* space between any 2 children.              */
+}
+
+#firstH1 { /* content doesn't work without ::after or ::before. So write it inside python's children attribute. */
+    text-align: center;
+    color: #ebe5e5;
+}
+
+#table1 {
+    height: 500px;
+    width: 750px;
+    background: #000000;
+    overflow: scroll;
+    box-shadow: 0 0 15px rgba(37, 37, 37, 0.9);
+    position: relative;
+}
+
+#table1 .dash-header { /* table1 and  .dash-header must have space between them. */
+    background: rgb(0, 0, 0);   /* rgba(2; 158; 247; 0.5) */
+    color: #dadfe6;
+    font-family: "Segoe UI";
+    font-weight: "semi-bold";
+    font-size : 18px;
+    text-align: center;
+    border: 2px solid white !important; /* Use "!important" if you want to override Dash's default border style.*/
+    text-shadow: 0 0 10px white !important;
+
+    position : sticky;
+    top: -2px; /* style_header is child and the parent is the DataTable. */
+    
+    z-index: 1; /* Hence, floating_div goes beneath dash-header. */
+}
+
+#table1 .dash-cell {
+    background: #1D1F22DC;
+    color: #b9c3d1;
+    font-family: "Segoe UI";
+    font-size: 16px;
+
+    text-align: center; /* It centers horizontally, not vertically. */
+    /* line-height: 0px;  Distance between the text and the cell. */
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='css/styles.css') }}" rel = "stylesheet">
+</head>
+
+<body>
+    <div id = "first_page">
+        <div id="dash_table">
+            <!-- <iframe id="crops_table" src="/dashboard/" loading="lazy"> </iframe> -->
+            <a id = "crops_table_link" href = "/dashboard/" target = "_blank"> Sample of Crops with corresponding values </a>
+        </div>
+
+        <div id = "Input_Forms">                              <!-- value="{{ N or 85 }}" means show N if its not None, else 85 -->
+            <form id = "form" action = "/"  method = "post">  <!-- step = "0.1" if you want stricly one decimal value. -->
+                <label for = "Nirtrogen">Ratio of Nitrogen content in soil : </label>                                           <br>
+                <input type = "number" id = "Nirtrogen" step = "any" value="{{ N }}" name = "N" required>                       <br>
+                <label for = "Phosphorous">Ratio of Phosphorous content in soil :</label>                                       <br>
+                <input type = "number" id = "Phosphorous" step = "any" value="{{ P }}" name = "P" required>                     <br>
+                <label for = "Potassium">Ratio of Potassium content in soil : </label>                                          <br>
+                <input type = "number" id = "Potassium" step = "any" value="{{ K }}" name = "K" required>                       <br>
+                <label for = "Temperature">Temperature in degree Celsius :</label>                                              <br>
+                <input type = "number" id = "Temperature" step = "any" value="{{ temperature }}" name = "temperature" required> <br>
+                <label for = "Humidity">Relative humidity in % :</label>                                                        <br>
+                <input type = "number" id = "Humidity" step = "any" value="{{ humidity }}" name = "humidity" required>          <br>
+                <label for = "pH">pH value of the soil :</label>                                                                <br>
+                <input type = "number" id = "pH" step = "any" value="{{ ph }}" name = "ph" required>                            <br>
+                <label for = "Rainfall">Rainfall in mm :</label>                                                                <br>
+                <input type = "number" id = "Rainfall" step = "any" value="{{ rainfall }}" name = "rainfall" required>          <br>
+
+                <button type = "submit" id = "submit_button"> Predict Crop </button>
+            </form>
+        </div>
+
+        {% if prediction %}
+        <div id = "lower_div" >
+            <div id = "Output_results">
+                <!-- Below at the beginning you can write "Request = {{ request.method }} and" to see which http method i.e. function/
+                    decorator (@app.get/@app.post) in main.py is being executed. -->
+                <p> It would be wise to plant : <strong>{{ prediction }}</strong>. </p>
+                <img id = "crop_image" src="{{ url_for('static', path='crops_images/' ~ prediction ~ '.png') }}" alt={{ prediction }}>
+            </div>
+            
+            <a href="\"> <button id = "re_predict"> Lets Predict Again </button> </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="static/js/scripts.js"></script>
+
+</body>
+</html>

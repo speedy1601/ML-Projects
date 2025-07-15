@@ -13,3 +13,5 @@ dash
 fastapi
 starlette
 uvicorn
+xgboost
+joblib

@@ -15,3 +15,4 @@ starlette
 uvicorn
 xgboost
 joblib
+python-multipart

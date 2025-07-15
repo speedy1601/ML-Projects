@@ -12,7 +12,7 @@ from .dashApp.table import app as dash_app
 app = FastAPI(title = "Crop Prediction")
 
 # Mount static files.
-app.mount(path = "/static", app = StaticFiles(directory = r"app\static", html = True), name = "static")
+app.mount(path = "/static", app = StaticFiles(directory = "app/static", html = True), name = "static")
 app.mount(path = "/dashboard", app = WSGIMiddleware(dash_app.server), name = "dashboard")
 
 # Jinja2 templates.

@@ -14,7 +14,9 @@
         </div>
 
         <div id = "Input_Forms">                              <!-- value="{{ N or 85 }}" means show N if its not None, else 85 -->
-            <form id = "form" action = "/"  method = "post">  <!-- step = "0.1" if you want stricly one decimal value. -->
+            <!-- <form id = "form" action = "/"  method = "post">  step = "0.1" if you want stricly one decimal value. -->
+            <!-- <form id = "form" hx-post="/" hx-target="#lower_div" hx-swap="innerHTML"> -->
+            <form id = "form" hx-post = "/" hx-target = "#lower_div" hx-swap = "innerHTML">
                 <label for = "Nirtrogen">Ratio of Nitrogen content in soil : </label>                                           <br>
                 <input type = "number" id = "Nirtrogen" step = "any" value="{{ N }}" name = "N" required>                       <br>
                 <label for = "Phosphorous">Ratio of Phosphorous content in soil :</label>                                       <br>
@@ -34,8 +36,9 @@
             </form>
         </div>
 
-        {% if prediction %}
-        <div id = "lower_div" >
+        
+        <div id = "lower_div" > <!-- If you put lower_div inside if condition, then when this page will render first time, above -->
+            {% if prediction %} <!-- form's hx-target = "#lower_div" won't detect the lower_div. -->
             <div id = "Output_results">
                 <!-- Below at the beginning you can write "Request = {{ request.method }} and" to see which http method i.e. function/
                     decorator (@app.get/@app.post) in main.py is being executed. -->
@@ -44,11 +47,12 @@
             </div>
             
             <a href="\"> <button id = "re_predict"> Lets Predict Again </button> </a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     <script src="static/js/scripts.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 
 </body>
 </html>

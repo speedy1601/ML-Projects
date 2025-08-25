@@ -37,13 +37,13 @@ labelEndcoder_model = joblib.load(ENCODER_MODEL_PATH)
 @app.get("/", response_class = HTMLResponse)
 async def page( request: Request,
                 prediction: str|None = Query(default = None),
-                N: float             = Query(default = None),
-                P: float             = Query(default = None),
-                K: float             = Query(default = None),
-                temperature: float   = Query(default = None),
-                humidity: float      = Query(default = None),
-                ph: float            = Query(default = None),
-                rainfall: float      = Query(default = None) ):
+                N: float             = Query(default = 10),
+                P: float             = Query(default = 10),
+                K: float             = Query(default = 10),
+                temperature: float   = Query(default = 10),
+                humidity: float      = Query(default = 10),
+                ph: float            = Query(default = 10),
+                rainfall: float      = Query(default = 10) ):
     
     return templates.TemplateResponse(name    = "index.html",
                                       context = {"request"      : request,
@@ -56,7 +56,7 @@ async def page( request: Request,
                                                  "ph"           : ph,
                                                  "rainfall"     : rainfall})
 
-@app.post("/", response_class = RedirectResponse)
+@app.post("/", response_class = HTMLResponse)
 async def predict(request: Request,
                   N: float           = Form(...),
                   P: float           = Form(...),
@@ -71,6 +71,14 @@ async def predict(request: Request,
     predicted_crop_name = labelEndcoder_model.inverse_transform(predicted_crop_no)[0] # corresponding crop_name.
 
     # encoded_crop = urllib.parse.quote(predicted_crop_name) # It converts characters not allowed to have special meanings in URLs (like spaces, &, =, etc.)
+    
+    # return RedirectResponse(url=f"/?request={request.method}&prediction={predicted_crop_name}&N={N}&P={P}&K={K}&temperature={temperature}&humidity={humidity}&ph={ph}&rainfall={rainfall}",
+    #                         status_code = 303)
+    
+    # if request.headers.get("HX-Request"):
+    return templates.TemplateResponse(name = "partials/prediction.html",
+                                      context = {"request"   : request,
+                                                 "prediction": predicted_crop_name},
+                                      status_code = 200)
 
-    return RedirectResponse(url=f"/?request={request.method}&prediction={predicted_crop_name}&N={N}&P={P}&K={K}&temperature={temperature}&humidity={humidity}&ph={ph}&rainfall={rainfall}",
-                            status_code = 303)
+# cd 1_crop_prediction\crop_app          uvicorn app.main:app --reload

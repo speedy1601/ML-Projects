@@ -1,0 +1,8 @@
+<div id = "Output_results">
+    <!-- Below at the beginning you can write "Request = {{ request.method }} and" to see which http method i.e. function/
+        decorator (@app.get/@app.post) in main.py is being executed. -->
+    <p> It would be wise to plant : <strong>{{ prediction }}</strong>. </p>
+    <img id = "crop_image" src="{{ url_for('static', path='crops_images/' ~ prediction ~ '.png') }}" alt={{ prediction }}>
+</div>
+
+<a href="\"> <button id = "re_predict"> Lets Predict Again </button> </a>

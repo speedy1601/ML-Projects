@@ -6,6 +6,7 @@ geopy
 requests
 starlette
 uvicorn
+Jinja2
 xgboost
 joblib
 python-multipart

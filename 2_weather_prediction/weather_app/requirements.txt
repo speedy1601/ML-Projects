@@ -1,0 +1,11 @@
+numpy
+polars
+scikit-learn==1.6.1
+fastapi
+geopy
+requests
+starlette
+uvicorn
+xgboost
+joblib
+python-multipart

@@ -11,3 +11,4 @@ xgboost
 joblib
 python-multipart
 feature-engine
+pyarrow

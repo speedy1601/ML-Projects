@@ -1,0 +1,13 @@
+<div class="hourly-forecast">
+    <h2 class="location">For City {{ city }} : Next 5 Hours' Nowcast</h2>
+    
+    <div class="forecast-cards">
+        {% for i in range(dates|length) %}
+        <div class="forecast-card">
+            <div class="forecast-time">{{ dates[i] }}</div>
+            <div class="forecast-temp">{{ temperature[i] }}°C</div>
+            <div class="forecast-rain">{{ predicted_rainfalls[i] }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

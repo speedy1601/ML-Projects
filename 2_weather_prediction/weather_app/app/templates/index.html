@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Weather Dashboard</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://unpkg.com/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{{ url_for('static', path='css/styles.css') }}" rel = "stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather Nowcasting</h1>
+        </header>
+
+        <div class="search-container">
+            <form class="search-box" hx-post="/" hx-target=".weather-dashboard" hx-swap="innerHTML" hx-indicator="#spinner">
+                <input type="text" placeholder="Search for a city..." name="city" value="{{ city }}">
+                <button type="submit">
+                    <i class="fas fa-search"></i> Search
+                    <span id="spinner" class="loading" style="display: none;"></span>
+                </button>
+            </form>
+        </div>
+
+        <div class="weather-dashboard">
+            <div class="hourly-forecast">
+                <h2 class="location">For City {{ city }} : Next 5 Hours' Nowcast</h2>
+             
+                <div class="forecast-cards">
+                    {% for i in range(dates|length) %}
+                    <div class="forecast-card">
+                        <div class="forecast-time">{{ dates[i] }}</div>
+                        <div class="forecast-temp">{{ temperature[i] }}°C</div>
+                        <div class="forecast-rain">{{ predicted_rainfalls[i] }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

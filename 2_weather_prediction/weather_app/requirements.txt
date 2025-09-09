@@ -10,4 +10,4 @@ Jinja2
 xgboost
 joblib
 python-multipart
-feature_engine
+feature-engine
